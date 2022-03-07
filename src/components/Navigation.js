@@ -1,15 +1,27 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 
 function Navigation() {
+	const history = useHistory();
+
 	return (
-		<Navbar fixed="top" sticky="top" expand="sm" bg="light">
+		<Navbar className="myNavbar" expand="sm" bg="light">
 			<Container>
-				<Navbar.Brand href="#">HelathCare</Navbar.Brand>
+				{/* Brand name and logo */}
+				<Navbar.Brand>
+					<Link to="/">HelathCare</Link>
+				</Navbar.Brand>
+
 				<Navbar.Toggle />
-				<Navbar.Collapse>
+
+				{/* For hamburger menu */}
+				<Navbar.Collapse className="navbar-Collapse">
 					<Nav>
-						<Nav.Link> LOGIN</Nav.Link>
+						<Link className="nav-link" to="/panel">
+							Panel
+						</Link>
 						<Link className="nav-link" to="/services">
 							Services
 						</Link>
@@ -20,6 +32,26 @@ function Navigation() {
 							Solution
 						</Link>
 					</Nav>
+
+					{/* Login Button */}
+					<Button
+						className="login-btn"
+						variant="text"
+						color="primary"
+						onClick={() => history.push('/login')}
+					>
+						Login
+					</Button>
+
+					{/* Signup Button */}
+					<Button
+						className="signup-btn"
+						variant="contained"
+						color="success"
+						onClick={() => history.push('/register')}
+					>
+						Sign up
+					</Button>
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>
