@@ -1,0 +1,47 @@
+/* variables */
+
+/* Clean up */
+body,
+html {
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+ul {
+	color: black !important;
+}
+
+a {
+	color: black !important;
+	text-decoration: none !important;
+}
+
+/* Navabar */
+.myNavbar {
+	margin: 15px auto;
+}
+.navbar-Collapse {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start !important;
+}
+
+/* For large Device */
+@media screen and (min-width: 426px) {
+	.navbar-Collapse {
+		flex-direction: row;
+		align-items: center !important;
+	}
+	.login-btn {
+		margin-left: auto !important;
+		margin-right: 10px !important;
+	}
+}
