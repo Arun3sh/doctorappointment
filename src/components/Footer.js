@@ -28,6 +28,7 @@ function Footer() {
 								<li
 									className="list-item"
 									key={index}
+									style={{ cursor: 'pointer' }}
 									onClick={() => history.push(`/${d.toLowerCase()}`)}
 								>
 									{d}
