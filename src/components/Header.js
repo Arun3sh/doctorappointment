@@ -35,7 +35,7 @@ function Header() {
 	return (
 		<div className="header-wrapper">
 			<div className="slide-image">
-				<img src={imgData[index]} alt="broken" aria-label="promotion" />
+				<img src={imgData[index]} alt="broken" aria-label="promotion" onDragEnd={next} />
 			</div>
 			<div className="image-slider">
 				<div className="prevBtn-container" onClick={prev}>
