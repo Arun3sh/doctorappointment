@@ -4,19 +4,26 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function App() {
+	const [login, setLogin] = useState(false);
+	const location = useLocation();
+
 	return (
 		<div className="App">
-			<Navigation />
+			{location.pathname === '/register' || location.pathname === '/login' ? '' : <Navigation />}
 			<Switch>
 				<Route exact path="/">
 					<Home />
 				</Route>
+				<Route path="/register">register</Route>
+				<Route path="/login">login</Route>
 				<Route path="/news & event">hi</Route>
 				<Route path="/**">Error</Route>
 			</Switch>
-			<Footer />
+			{location.pathname === '/register' || location.pathname === '/login' ? '' : <Footer />}
 		</div>
 	);
 }
