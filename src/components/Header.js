@@ -35,14 +35,18 @@ function Header() {
 	return (
 		<div className="header-wrapper">
 			<div className="slide-image">
-				<img src={imgData[index]} alt="broken" aria-label="promotion" onDragEnd={next} />
+				<img src={imgData[index]} alt="broken" aria-label="promotion" />
 			</div>
 			<div className="image-slider">
-				<div className="prevBtn-container" onClick={prev}>
-					<GrLinkPrevious className="prevBtn" />
+				<div className="prevBtn-container" onTouchEnd={prev}>
+					<div className="prevBtn-wrapper">
+						<GrLinkPrevious className="prevBtn" />
+					</div>
 				</div>
-				<div className="nextBtn-container" onClick={next}>
-					<GrLinkNext className="nextBtn" />
+				<div className="nextBtn-container" onTouchEnd={next}>
+					<div className="nextBtn-wrapper">
+						<GrLinkNext className="nextBtn" />
+					</div>
 				</div>
 			</div>
 		</div>
