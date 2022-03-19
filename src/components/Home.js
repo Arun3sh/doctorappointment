@@ -11,7 +11,6 @@ import {
 import Slider from 'react-touch-drag-slider';
 
 function Home() {
-	// const myStyle = { backgroundImage: `${imgData[index]}`, height: '350px' };
 	return (
 		<div className="container-sm home-wrapper">
 			<Header />
@@ -131,7 +130,7 @@ function Testimonial() {
 				activeIndex={0}
 				threshHold={100}
 				transition={0.5}
-				scaleOnDrag={false}
+				scaleOnDrag={true}
 			>
 				{testimonialData.map(({ name, position, userOpinion }, index) => (
 					<Card sx={{ maxWidth: 320 }} className="testimonial-card" key={index}>

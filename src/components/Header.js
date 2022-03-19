@@ -39,12 +39,12 @@ function Header() {
 			</div>
 			<div className="image-slider">
 				<div className="prevBtn-container" onTouchEnd={prev}>
-					<div className="prevBtn-wrapper">
+					<div className="prevBtn-wrapper" onClick={prev}>
 						<GrLinkPrevious className="prevBtn" />
 					</div>
 				</div>
 				<div className="nextBtn-container" onTouchEnd={next}>
-					<div className="nextBtn-wrapper">
+					<div className="nextBtn-wrapper" onClick={next}>
 						<GrLinkNext className="nextBtn" />
 					</div>
 				</div>
