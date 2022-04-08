@@ -1,3 +1,4 @@
+import './../user pages/Login.css';
 import docIllu from '../../asset/images/doctor-in-phone.png';
 import {
 	Button,
@@ -38,7 +39,7 @@ function Login() {
 						</FormControl>
 
 						<div className="login-form-div">
-							<TextField variant="standard" label="email id" autoFocus="yes" />
+							<TextField variant="standard" label="email id" autoFocus />
 							<TextField variant="standard" label="password" type="password" />
 							<div className="submit-user">
 								<Button variant="outlined" color="error" onClick={() => history.goBack()}>
