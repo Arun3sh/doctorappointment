@@ -8,6 +8,8 @@ import { createContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Login from './components/user pages/Login';
 import Appointment from './components/user pages/Appointment';
+import Createappointment from './components/user pages/Createappointment';
+import Newappointment from './components/user pages/Newappointment';
 
 export const authContext = createContext(null);
 
@@ -34,6 +36,12 @@ function App() {
 					</Route>
 					<Route path="/appointment">
 						<Appointment />
+					</Route>
+					<Route path="/create-appointment">
+						<Createappointment />
+					</Route>
+					<Route path="/create-new-appointment">
+						<Newappointment />
 					</Route>
 					<Route path="/**">Error</Route>
 				</Switch>

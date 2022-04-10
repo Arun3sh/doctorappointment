@@ -1,3 +1,15 @@
 .appointment-wrapper {
 	margin-top: 80px;
 }
+.appointment-title {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+}
+
+@media screen and (min-width: 426px) {
+	.appointment-title {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+}
