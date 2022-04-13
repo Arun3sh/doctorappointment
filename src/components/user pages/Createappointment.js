@@ -1,36 +1,21 @@
 import { Button, MenuItem, Select } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { doctorAPI } from '../../asset/global';
 import './Createappointment.css';
 
 function Createappointment() {
 	const [selectDoc, setSelectDoc] = useState('Choose Dept');
-	const docList = [
-		{
-			name: 'Dr. Arun ',
-			dept: 'General Surgeon',
-			about:
-				'Cupidatat esse laboris cupidatat aliqua irure. Amet tempor consequat in tempor. Laboris ullamco quis non culpa esse non aute.',
-		},
-		{
-			name: 'Dr. Janani',
-			dept: 'Dentist',
-			about:
-				'Cupidatat esse laboris cupidatat aliqua irure. Amet tempor consequat in tempor. Laboris ullamco quis non culpa esse non aute.',
-		},
-		{
-			name: 'Dr. Vike',
-			dept: 'Cardiologist',
-			about:
-				'Cupidatat esse laboris cupidatat aliqua irure. Amet tempor consequat in tempor. Laboris ullamco quis non culpa esse non aute.',
-		},
-		{
-			name: 'Dr. Sowmiya ',
-			dept: 'Pediatrician',
-			about:
-				'Cupidatat esse laboris cupidatat aliqua irure. Amet tempor consequat in tempor. Laboris ullamco quis non culpa esse non aute.',
-		},
-	];
+	const [docList, setDocList] = useState([]);
+
+	const getDoctors = async () => {
+		await fetch(`${doctorAPI}/`, {
+			method: 'GET',
+		})
+			.then((data) => data.json())
+			.then((data) => setDocList(data));
+	};
+	useEffect(getDoctors, []);
 	return (
 		<div className="create-app container">
 			<div className="create-app-container">
@@ -45,8 +30,10 @@ function Createappointment() {
 						<MenuItem value="Choose Dept" selected disabled>
 							Choose Dept
 						</MenuItem>
-						{docList.map(({ dept }) => (
-							<MenuItem value={dept}>{dept}</MenuItem>
+						{docList.map(({ dept }, index) => (
+							<MenuItem key={index} value={dept}>
+								{dept}
+							</MenuItem>
 						))}
 					</Select>
 					<div className="input-search">
@@ -68,7 +55,7 @@ function GetDoctorList({ docList }) {
 	const history = useHistory();
 	return (
 		<div>
-			{docList.map(({ name, dept, about }, index) => (
+			{docList.map(({ _id, name, dept, about, timeslot }, index) => (
 				<div className="doc-info" key={index}>
 					<h4>{name}</h4>
 					<p>{dept}</p>
@@ -76,7 +63,13 @@ function GetDoctorList({ docList }) {
 					<Button
 						variant="outlined"
 						color="success"
-						onClick={() => history.push('/create-new-appointment')}
+						onClick={() => {
+							localStorage.setItem('doc_id', _id);
+							localStorage.setItem('dr_name', name);
+							localStorage.setItem('dept', dept);
+							localStorage.setItem('timeslot', timeslot);
+							history.push(`/create-new-appointment/${localStorage.getItem('id')}`);
+						}}
 					>
 						Book Appointment
 					</Button>
