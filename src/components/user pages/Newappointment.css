@@ -1,3 +1,26 @@
 .newappointment-wrapper {
 	margin-top: 90px;
+	min-height: 90vh;
+}
+.app-book-form {
+	display: flex;
+	flex-direction: column;
+	width: 280px;
+	margin: auto;
+	padding: 20px;
+}
+.btns-div {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row-reverse;
+}
+
+@media screen and (min-width: 426px) {
+	.app-book-form {
+		width: 690px;
+	}
+	.date,
+	.select-input {
+		width: 350px;
+	}
 }

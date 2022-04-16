@@ -13,6 +13,7 @@ import { patientAPI } from '../../asset/global';
 
 function Newappointment() {
 	const history = useHistory();
+	const inputStyle = { marginBottom: '20px' };
 
 	// For getting current date
 	const maxsec = ms('5 days');
@@ -84,10 +85,11 @@ function Newappointment() {
 					{/* User has to fill these */}
 
 					<TextField
+						style={inputStyle}
 						multiline
-						maxRows={4}
+						rows={4}
 						label="Reason Of Visit"
-						variant="filled"
+						variant="outlined"
 						id="pt_reason"
 						name="pt_reason"
 						value={values.pt_reason}
@@ -98,16 +100,18 @@ function Newappointment() {
 					/>
 
 					<input
+						style={inputStyle}
 						type={'date'}
 						min={minDate}
 						max={maxDate}
 						id="date"
-						name="date"
+						className="date"
 						onChange={(e) => (values.date = e.target.value)}
 					/>
 
 					{/* For selecting time slot */}
 					<Select
+						style={inputStyle}
 						className="select-input"
 						id="timeslot"
 						name="timeslot"
