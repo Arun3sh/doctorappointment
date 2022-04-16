@@ -1,8 +1,14 @@
 .appointment-wrapper {
-	margin-top: 80px;
+	margin-top: 90px;
 }
 .appointment-container {
 	min-height: 90vh;
+}
+.doc-name-div {
+	margin-top: 15px;
+}
+.app-status {
+	margin-bottom: 15px;
 }
 .appointment-title {
 	display: flex;
@@ -23,8 +29,7 @@
 	box-shadow: 0px 0px 5px;
 	margin-left: auto;
 	margin-right: auto;
-	width: 690px;
-	min-width: 296px;
+	width: 296px;
 }
 .app-btns {
 	display: flex;
@@ -35,5 +40,8 @@
 	.appointment-title {
 		flex-direction: row;
 		justify-content: space-between;
+	}
+	.appointment-card {
+		width: 690px;
 	}
 }

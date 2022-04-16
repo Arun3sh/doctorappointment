@@ -1,11 +1,13 @@
 import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { patientAPI } from '../../asset/global';
 import './Appointment.css';
 
 function Appointment() {
 	const history = useHistory();
+	const [cancel, setCancel] = useState('no');
 	const [aptm, setAptm] = useState([]);
 
 	// To get all appointments of patient
@@ -14,9 +16,12 @@ function Appointment() {
 			method: 'GET',
 		})
 			.then((data) => data.json())
-			.then((d) => setAptm(d.appointments.reverse()));
+			.then(
+				(d) =>
+					setCancel('no') & setAptm(d.appointments !== undefined ? d.appointments.reverse() : [])
+			);
 	};
-	useEffect(getAptm, []);
+	useEffect(getAptm, [cancel]);
 
 	return (
 		<div className="appointment-wrapper container-sm">
@@ -31,13 +36,33 @@ function Appointment() {
 						Get Appointment
 					</Button>
 				</div>
-				{aptm.length > 0 ? <AppointmentCard aptm={aptm} /> : 'Please Book Your appointment'}
+				{aptm.length > 0 ? (
+					<AppointmentCard aptm={aptm} setCancel={setCancel} />
+				) : (
+					'Please Book Your appointment'
+				)}
 			</div>
 		</div>
 	);
 }
 
-function AppointmentCard({ aptm }) {
+function AppointmentCard({ aptm, setCancel }) {
+	const cancelAppointment = async (date) => {
+		await fetch(`${patientAPI}/update-appointment-status/${localStorage.getItem('id')}`, {
+			method: 'PUT',
+			body: JSON.stringify({ date: date, status: 'cancelled' }),
+			headers: {
+				'Content-type': 'application/json',
+				'x-auth-token': ` ${localStorage.getItem('token')}`,
+			},
+		})
+			.then(() => {
+				toast.success('Appointment Cancelled');
+				setCancel('true');
+			})
+			.catch((err) => toast.error('Invalid Request'));
+	};
+
 	return (
 		<div className="appointments">
 			{aptm.map(({ dr_name, pt_reason, date, timeslot, status }, index) => (
@@ -45,15 +70,28 @@ function AppointmentCard({ aptm }) {
 					<h4 className="date-time">
 						{date} @ {timeslot}
 					</h4>
-					<p className="doc-name">Dr. {dr_name}</p>
-					<p className="app-para">Reason of Visit: {pt_reason}</p>
-					<h6 className="app-status">Appointment Status: {status}</h6>
-					<div className="app-btns">
-						<Button variant="outlined" color="error">
-							Cancel
-						</Button>
-						<Button variant="outlined">Reschedule</Button>
+					<div className="doc-name-div">
+						<p className="doc-name">Dr. {dr_name}</p>
 					</div>
+					<div className="app-reason">
+						<p className="app-para">Reason of Visit: </p>
+						<p className="reason-para">{pt_reason}</p>
+					</div>
+					<div className="app-status">
+						<h5>Status: {status}</h5>
+					</div>
+
+					{/* Cancel and reschedule options for patients */}
+					{status !== 'pending' ? (
+						''
+					) : (
+						<div className="app-btns">
+							<Button variant="outlined" color="error" onClick={() => cancelAppointment(date)}>
+								Cancel
+							</Button>
+							<Button variant="outlined">Reschedule</Button>
+						</div>
+					)}
 				</div>
 			))}
 		</div>
