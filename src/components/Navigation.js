@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { authContext } from '../App';
 
 function Navigation() {
-	const { login, setLogin } = useContext(authContext);
+	const { login, setLogin, value, setValue } = useContext(authContext);
 	const history = useHistory();
 
 	return (
@@ -14,7 +14,7 @@ function Navigation() {
 			<Container>
 				{/* Brand name and logo */}
 				<Navbar.Brand>
-					<Link to="/">HelathCare</Link>
+					<Link to="/">HealthCare</Link>
 				</Navbar.Brand>
 
 				<Navbar.Toggle />
@@ -22,32 +22,50 @@ function Navigation() {
 				{/* For hamburger menu */}
 				<Navbar.Collapse className="navbar-Collapse">
 					<Nav>
-						<Link className="nav-link" to="/panel">
-							Panel
-						</Link>
-						<Link className="nav-link" to="/services">
-							Services
-						</Link>
-						<Link className="nav-link" to="/about">
-							About
-						</Link>
-						<Link className="nav-link" to="/solution">
-							Solution
-						</Link>
+						{value === 'patient' ? (
+							<>
+								<Nav.Link className="nav-link">Panel</Nav.Link>
+								<Nav.Link className="nav-link">Services</Nav.Link>
+								<Nav.Link className="nav-link">About</Nav.Link>
+								<Nav.Link className="nav-link">Solution</Nav.Link>
+							</>
+						) : (
+							''
+						)}
 
 						{/* Once user is logged in they can see this specific menu to help them navigate to medical space */}
 						{login ? (
-							<NavDropdown title="Medical Records" id="basic-nav-dropdown">
-								<NavDropdown.Item as={Link} to="/appointment">
-									Appointment
-								</NavDropdown.Item>
-								<NavDropdown.Item as={Link} to="/treatment-record">
-									Treatment Record
-								</NavDropdown.Item>
-								<NavDropdown.Item as={Link} to="/prescription">
-									Prescription
-								</NavDropdown.Item>
-							</NavDropdown>
+							value === 'patient' ? (
+								<NavDropdown title="Medical Records" id="basic-nav-dropdown">
+									<NavDropdown.Item as={Link} to="/appointment">
+										Appointment
+									</NavDropdown.Item>
+									<NavDropdown.Item as={Link} to="/treatment-record">
+										Treatment Record
+									</NavDropdown.Item>
+									<NavDropdown.Item as={Link} to="/prescription">
+										Prescription
+									</NavDropdown.Item>
+								</NavDropdown>
+							) : value === 'doctor' ? (
+								<NavDropdown title="Medical Records" id="basic-nav-dropdown">
+									<NavDropdown.Item as={Link} to="/appointment">
+										View Appointments
+									</NavDropdown.Item>
+									<NavDropdown.Item as={Link} to="/treatment-record">
+										Write Summary
+									</NavDropdown.Item>
+								</NavDropdown>
+							) : (
+								<NavDropdown title="Doctor Options" id="basic-nav-dropdown">
+									<NavDropdown.Item as={Link} to="/create-doctor">
+										Create Doctor
+									</NavDropdown.Item>
+									<NavDropdown.Item as={Link} to="/view-doctor-record">
+										View Doctor Record
+									</NavDropdown.Item>
+								</NavDropdown>
+							)
 						) : (
 							''
 						)}
@@ -68,7 +86,9 @@ function Navigation() {
 							className="login-btn"
 							variant="text"
 							color="primary"
-							onClick={() => setLogin(!login) & history.push('/')}
+							onClick={() =>
+								setLogin(!login) & localStorage.clear() & setValue('patient') & history.push('/')
+							}
 						>
 							Logout
 						</Button>
