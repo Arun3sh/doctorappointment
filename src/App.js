@@ -18,6 +18,7 @@ import Doctorappointment from './components/doctor pages/Doctorappointment';
 import Doctorwritesummary from './components/doctor pages/Doctorwritesummary';
 import Register from './components/user pages/Register';
 import Createdoctor from './components/admin pages/Createdoctor';
+import Viewdoctor from './components/admin pages/Viewdoctor';
 
 export const authContext = createContext(null);
 
@@ -45,11 +46,15 @@ function App() {
 					<Route path="/register">
 						<Register />
 					</Route>
+
+					<Route path="/login">
+						<Login />
+					</Route>
 					<Route path="/create-doctor">
 						<Createdoctor />
 					</Route>
-					<Route path="/login">
-						<Login />
+					<Route path="/view-doctor-record">
+						<Viewdoctor />
 					</Route>
 					<Route path="/appointment">
 						{/* Here after redirect check if doctor then use <Doctorappointment/> like that */}

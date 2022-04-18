@@ -38,7 +38,7 @@ p {
 	left: 0;
 	right: 0;
 	position: fixed !important;
-	z-index: 1;
+	z-index: 99;
 }
 .navbar-brand a {
 	color: var(--myBlue);

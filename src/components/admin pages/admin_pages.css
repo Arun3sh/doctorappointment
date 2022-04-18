@@ -1,0 +1,9 @@
+.view-doc-ul {
+	list-style: none;
+	padding: 10px;
+}
+.doclist-li {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	align-items: center;
+}
