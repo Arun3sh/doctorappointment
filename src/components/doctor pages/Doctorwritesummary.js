@@ -86,7 +86,10 @@ function AppointmentCard({ aptm, present }) {
 							</h4>
 							<p className="doc-name">{pt_name}</p>
 							<p className="app-para">Reason of Visit: {pt_reason}</p>
-							<div>
+							<div
+								className="doc-textfield"
+								style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
+							>
 								{discharge_summary.length > 1 ? (
 									<p>{discharge_summary}</p>
 								) : (
@@ -131,7 +134,7 @@ function AppointmentCard({ aptm, present }) {
 								''
 							) : (
 								<div className="app-btns">
-									<Button variant="outlined" color="error">
+									<Button variant="outlined" color="error" onClick={() => history.goBack()}>
 										Cancel
 									</Button>
 									<Button variant="outlined" onClick={handleSubmit}>

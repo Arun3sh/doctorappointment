@@ -149,7 +149,7 @@ function Createdoctor() {
 						<Button variant="outlined" type="submit" color="success">
 							Submit
 						</Button>
-						<Button variant="outlined" color="error">
+						<Button variant="outlined" color="error" onClick={() => history.goBack()}>
 							Cancel
 						</Button>
 					</form>
